@@ -9,6 +9,105 @@
  * @since Twenty Seventeen 1.0
  */
 
+
+
+
+// Our custom post type function
+function create_posttype() {
+ 
+    register_post_type( 'movies',
+    // CPT Options
+        array(
+            'labels' => array(
+                'name' => __( 'Movies' ),
+                'singular_name' => __( 'Movie' )
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'movies'),
+            'show_in_rest' => true,
+ 
+        )
+    );
+}
+// Hooking up our function to theme setup
+add_action( 'init', 'create_posttype' );
+
+
+
+
+
+/*
+* Creating a function to create our CPT
+*/
+ 
+function custom_post_type() {
+ 
+	// Set UI labels for Custom Post Type
+		$labels = array(
+			'name'                => _x( 'Movies', 'Post Type General Name', 'twentyseventeen' ),
+			'singular_name'       => _x( 'Movie', 'Post Type Singular Name', 'twentyseventeen' ),
+			'menu_name'           => __( 'Movies', 'twentyseventeen' ),
+			'parent_item_colon'   => __( 'Parent Movie', 'twentyseventeen' ),
+			'all_items'           => __( 'All Movies', 'twentyseventeen' ),
+			'view_item'           => __( 'View Movie', 'twentyseventeen' ),
+			'add_new_item'        => __( 'Add New Movie', 'twentyseventeen' ),
+			'add_new'             => __( 'Add New', 'twentyseventeen' ),
+			'edit_item'           => __( 'Edit Movie', 'twentyseventeen' ),
+			'update_item'         => __( 'Update Movie', 'twentyseventeen' ),
+			'search_items'        => __( 'Search Movie', 'twentyseventeen' ),
+			'not_found'           => __( 'Not Found', 'twentyseventeen' ),
+			'not_found_in_trash'  => __( 'Not found in Trash', 'twentyseventeen' ),
+		);
+		 
+	// Set other options for Custom Post Type
+		 
+		$args = array(
+			'label'               => __( 'movies', 'twentyseventeen' ),
+			'description'         => __( 'Movie news and reviews', 'twentyseventeen' ),
+			'labels'              => $labels,
+			// Features this CPT supports in Post Editor
+			'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
+			// You can associate this CPT with a taxonomy or custom taxonomy. 
+			'taxonomies'          => array( 'genres' ),
+			/* A hierarchical CPT is like Pages and can have
+			* Parent and child items. A non-hierarchical CPT
+			* is like Posts.
+			*/ 
+			'hierarchical'        => false,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => true,
+			'show_in_nav_menus'   => true,
+			'show_in_admin_bar'   => true,
+			'menu_position'       => 5,
+			'can_export'          => true,
+			'has_archive'         => true,
+			'exclude_from_search' => false,
+			'publicly_queryable'  => true,
+			'capability_type'     => 'post',
+			'show_in_rest' => true,
+	 
+		);
+		 
+		// Registering your Custom Post Type
+		register_post_type( 'movies', $args );
+	 
+	}
+	 
+	/* Hook into the 'init' action so that the function
+	* Containing our post type registration is not 
+	* unnecessarily executed. 
+	*/
+	 
+	add_action( 'init', 'custom_post_type', 10 );
+
+
+
+
+
+
+
 /**
  * Twenty Seventeen only works in WordPress 4.7 or later.
  */
@@ -16,6 +115,7 @@ if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
 	require get_template_directory() . '/inc/back-compat.php';
 	return;
 }
+
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
