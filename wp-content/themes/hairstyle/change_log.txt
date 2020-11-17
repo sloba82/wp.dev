@@ -1,0 +1,35 @@
+Version 1.0
+i) Intial version Release
+
+Version 1.1
+i) Removed unused functions and resolved issues as suggested by reviewer.
+
+Version 1.1.1
+i) Removed content fields from customizer.
+
+Version 1.1.2
+i) Resolved theme layout issue.
+
+Version 1.1.3
+i) Added option for enable checkbox.
+
+Version 1.1.4
+i) Removed unused functions and added proper license in readme.php
+
+Version 1.1.5
+i) Removed custom header from style.css
+
+Version 1.1.6
+i) Resolved few bugs and responsive layout issue.
+
+Version 1.1.7
+i) Removed documentation link and resolve site title hide issue.
+
+Version 1.2
+i) Resolved few bugs from the files.
+
+Version 1.2.1
+i) Make some edits on file and resolved some errors.
+
+Version 1.2.2
+i) Added skip to content button and resolve few errors.
