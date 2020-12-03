@@ -15,16 +15,16 @@
 // Our custom post type function
 function create_posttype() {
  
-    register_post_type( 'movies',
+    register_post_type( 'usluge',
     // CPT Options
         array(
             'labels' => array(
-                'name' => __( 'Movies' ),
-                'singular_name' => __( 'Movie' )
+                'name' => __( 'Usluge' ),
+                'singular_name' => __( 'Usluga' )
             ),
             'public' => true,
             'has_archive' => true,
-            'rewrite' => array('slug' => 'movies'),
+            'rewrite' => array('slug' => 'usluga'),
             'show_in_rest' => true,
  
         )
@@ -45,17 +45,17 @@ function custom_post_type() {
  
 	// Set UI labels for Custom Post Type
 		$labels = array(
-			'name'                => _x( 'Movies', 'Post Type General Name', 'twentyseventeen' ),
-			'singular_name'       => _x( 'Movie', 'Post Type Singular Name', 'twentyseventeen' ),
-			'menu_name'           => __( 'Movies', 'twentyseventeen' ),
-			'parent_item_colon'   => __( 'Parent Movie', 'twentyseventeen' ),
-			'all_items'           => __( 'All Movies', 'twentyseventeen' ),
-			'view_item'           => __( 'View Movie', 'twentyseventeen' ),
-			'add_new_item'        => __( 'Add New Movie', 'twentyseventeen' ),
-			'add_new'             => __( 'Add New', 'twentyseventeen' ),
-			'edit_item'           => __( 'Edit Movie', 'twentyseventeen' ),
-			'update_item'         => __( 'Update Movie', 'twentyseventeen' ),
-			'search_items'        => __( 'Search Movie', 'twentyseventeen' ),
+			'name'                => _x( 'Uslege', 'Post Type General Name', 'twentyseventeen' ),
+			'singular_name'       => _x( 'Usluga', 'Post Type Singular Name', 'twentyseventeen' ),
+			'menu_name'           => __( 'Usluga', 'twentyseventeen' ),
+			'parent_item_colon'   => __( 'Parent Usluga', 'twentyseventeen' ),
+			'all_items'           => __( 'Sve usluge', 'twentyseventeen' ),
+			'view_item'           => __( 'Pregledaj Uslugu', 'twentyseventeen' ),
+			'add_new_item'        => __( 'Dodaj novu uslugu', 'twentyseventeen' ),
+			'add_new'             => __( 'Nova usluga', 'twentyseventeen' ),
+			'edit_item'           => __( 'Izmeni uslugu', 'twentyseventeen' ),
+			'update_item'         => __( 'Update usluge', 'twentyseventeen' ),
+			'search_items'        => __( 'Pretrazi', 'twentyseventeen' ),
 			'not_found'           => __( 'Not Found', 'twentyseventeen' ),
 			'not_found_in_trash'  => __( 'Not found in Trash', 'twentyseventeen' ),
 		);
@@ -63,11 +63,11 @@ function custom_post_type() {
 	// Set other options for Custom Post Type
 		 
 		$args = array(
-			'label'               => __( 'movies', 'twentyseventeen' ),
-			'description'         => __( 'Movie news and reviews', 'twentyseventeen' ),
+			'label'               => __( 'usluga', 'twentyseventeen' ),
+			'description'         => __( 'opis usluge', 'twentyseventeen' ),
 			'labels'              => $labels,
 			// Features this CPT supports in Post Editor
-			'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
+			'supports'            => array( 'title', 'description', 'excerpt', 'image', 'thumbnail', 'custom-fields', ),
 			// You can associate this CPT with a taxonomy or custom taxonomy. 
 			'taxonomies'          => array( 'genres' ),
 			/* A hierarchical CPT is like Pages and can have
@@ -91,15 +91,27 @@ function custom_post_type() {
 		);
 		 
 		// Registering your Custom Post Type
-		register_post_type( 'movies', $args );
+		
+		register_post_type( 'usluge', $args );
+	//	add_post_type_support( 'usluga', 'thumbnail' );
+		add_filter('register_post_type_args', 'add_post_theme_support_args', 10, 2);
 	 
+	}
+
+	function add_post_theme_support_args($args, $post_type){
+ 
+		if ($post_type == 'usluge'){
+			$args['support'] = 'thumbnail';
+		}
+	 
+		return $args;
 	}
 	 
 	/* Hook into the 'init' action so that the function
 	* Containing our post type registration is not 
 	* unnecessarily executed. 
 	*/
-	 
+
 	add_action( 'init', 'custom_post_type', 10 );
 
 
@@ -124,220 +136,220 @@ if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '<' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function twentyseventeen_setup() {
-	/*
-	 * Make theme available for translation.
-	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/twentyseventeen
-	 * If you're building a theme based on Twenty Seventeen, use a find and replace
-	 * to change 'twentyseventeen' to the name of your theme in all the template files.
-	 */
-	load_theme_textdomain( 'twentyseventeen' );
+// function twentyseventeen_setup() {
+// 	/*
+// 	 * Make theme available for translation.
+// 	 * Translations can be filed at WordPress.org. See: https://translate.wordpress.org/projects/wp-themes/twentyseventeen
+// 	 * If you're building a theme based on Twenty Seventeen, use a find and replace
+// 	 * to change 'twentyseventeen' to the name of your theme in all the template files.
+// 	 */
+// 	load_theme_textdomain( 'twentyseventeen' );
 
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+// 	// Add default posts and comments RSS feed links to head.
+// 	add_theme_support( 'automatic-feed-links' );
 
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
+// 	/*
+// 	 * Let WordPress manage the document title.
+// 	 * By adding theme support, we declare that this theme does not use a
+// 	 * hard-coded <title> tag in the document head, and expect WordPress to
+// 	 * provide it for us.
+// 	 */
+// 	add_theme_support( 'title-tag' );
 
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-	 */
-	add_theme_support( 'post-thumbnails' );
+// 	/*
+// 	 * Enable support for Post Thumbnails on posts and pages.
+// 	 *
+// 	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+// 	 */
+// 	add_theme_support( 'post-thumbnails' );
 
-	add_image_size( 'twentyseventeen-featured-image', 2000, 1200, true );
+// 	add_image_size( 'twentyseventeen-featured-image', 2000, 1200, true );
 
-	add_image_size( 'twentyseventeen-thumbnail-avatar', 100, 100, true );
+// 	add_image_size( 'twentyseventeen-thumbnail-avatar', 100, 100, true );
 
-	// Set the default content width.
-	$GLOBALS['content_width'] = 525;
+// 	// Set the default content width.
+// 	$GLOBALS['content_width'] = 525;
 
-	// This theme uses wp_nav_menu() in two locations.
-	register_nav_menus(
-		array(
-			'top'    => __( 'Top Menu', 'twentyseventeen' ),
-			'social' => __( 'Social Links Menu', 'twentyseventeen' ),
-		)
-	);
+// 	// This theme uses wp_nav_menu() in two locations.
+// 	register_nav_menus(
+// 		array(
+// 			'top'    => __( 'Top Menu', 'twentyseventeen' ),
+// 			'social' => __( 'Social Links Menu', 'twentyseventeen' ),
+// 		)
+// 	);
 
-	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support(
-		'html5',
-		array(
-			'comment-form',
-			'comment-list',
-			'gallery',
-			'caption',
-			'script',
-			'style',
-			'navigation-widgets',
-		)
-	);
+// 	/*
+// 	 * Switch default core markup for search form, comment form, and comments
+// 	 * to output valid HTML5.
+// 	 */
+// 	add_theme_support(
+// 		'html5',
+// 		array(
+// 			'comment-form',
+// 			'comment-list',
+// 			'gallery',
+// 			'caption',
+// 			'script',
+// 			'style',
+// 			'navigation-widgets',
+// 		)
+// 	);
 
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://wordpress.org/support/article/post-formats/
-	 */
-	add_theme_support(
-		'post-formats',
-		array(
-			'aside',
-			'image',
-			'video',
-			'quote',
-			'link',
-			'gallery',
-			'audio',
-		)
-	);
+// 	/*
+// 	 * Enable support for Post Formats.
+// 	 *
+// 	 * See: https://wordpress.org/support/article/post-formats/
+// 	 */
+// 	add_theme_support(
+// 		'post-formats',
+// 		array(
+// 			'aside',
+// 			'image',
+// 			'video',
+// 			'quote',
+// 			'link',
+// 			'gallery',
+// 			'audio',
+// 		)
+// 	);
 
-	// Add theme support for Custom Logo.
-	add_theme_support(
-		'custom-logo',
-		array(
-			'width'      => 250,
-			'height'     => 250,
-			'flex-width' => true,
-		)
-	);
+// 	// Add theme support for Custom Logo.
+// 	add_theme_support(
+// 		'custom-logo',
+// 		array(
+// 			'width'      => 250,
+// 			'height'     => 250,
+// 			'flex-width' => true,
+// 		)
+// 	);
 
-	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
+// 	// Add theme support for selective refresh for widgets.
+// 	add_theme_support( 'customize-selective-refresh-widgets' );
 
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, and column width.
-	  */
-	add_editor_style( array( 'assets/css/editor-style.css', twentyseventeen_fonts_url() ) );
+// 	/*
+// 	 * This theme styles the visual editor to resemble the theme style,
+// 	 * specifically font, colors, and column width.
+// 	  */
+// 	add_editor_style( array( 'assets/css/editor-style.css', twentyseventeen_fonts_url() ) );
 
-	// Load regular editor styles into the new block-based editor.
-	add_theme_support( 'editor-styles' );
+// 	// Load regular editor styles into the new block-based editor.
+// 	add_theme_support( 'editor-styles' );
 
-	// Load default block styles.
-	add_theme_support( 'wp-block-styles' );
+// 	// Load default block styles.
+// 	add_theme_support( 'wp-block-styles' );
 
-	// Add support for responsive embeds.
-	add_theme_support( 'responsive-embeds' );
+// 	// Add support for responsive embeds.
+// 	add_theme_support( 'responsive-embeds' );
 
-	// Define and register starter content to showcase the theme on new sites.
-	$starter_content = array(
-		'widgets'     => array(
-			// Place three core-defined widgets in the sidebar area.
-			'sidebar-1' => array(
-				'text_business_info',
-				'search',
-				'text_about',
-			),
+// 	// Define and register starter content to showcase the theme on new sites.
+// 	$starter_content = array(
+// 		'widgets'     => array(
+// 			// Place three core-defined widgets in the sidebar area.
+// 			'sidebar-1' => array(
+// 				'text_business_info',
+// 				'search',
+// 				'text_about',
+// 			),
 
-			// Add the core-defined business info widget to the footer 1 area.
-			'sidebar-2' => array(
-				'text_business_info',
-			),
+// 			// Add the core-defined business info widget to the footer 1 area.
+// 			'sidebar-2' => array(
+// 				'text_business_info',
+// 			),
 
-			// Put two core-defined widgets in the footer 2 area.
-			'sidebar-3' => array(
-				'text_about',
-				'search',
-			),
-		),
+// 			// Put two core-defined widgets in the footer 2 area.
+// 			'sidebar-3' => array(
+// 				'text_about',
+// 				'search',
+// 			),
+// 		),
 
-		// Specify the core-defined pages to create and add custom thumbnails to some of them.
-		'posts'       => array(
-			'home',
-			'about'            => array(
-				'thumbnail' => '{{image-sandwich}}',
-			),
-			'contact'          => array(
-				'thumbnail' => '{{image-espresso}}',
-			),
-			'blog'             => array(
-				'thumbnail' => '{{image-coffee}}',
-			),
-			'homepage-section' => array(
-				'thumbnail' => '{{image-espresso}}',
-			),
-		),
+// 		// Specify the core-defined pages to create and add custom thumbnails to some of them.
+// 		'posts'       => array(
+// 			'home',
+// 			'about'            => array(
+// 				'thumbnail' => '{{image-sandwich}}',
+// 			),
+// 			'contact'          => array(
+// 				'thumbnail' => '{{image-espresso}}',
+// 			),
+// 			'blog'             => array(
+// 				'thumbnail' => '{{image-coffee}}',
+// 			),
+// 			'homepage-section' => array(
+// 				'thumbnail' => '{{image-espresso}}',
+// 			),
+// 		),
 
-		// Create the custom image attachments used as post thumbnails for pages.
-		'attachments' => array(
-			'image-espresso' => array(
-				'post_title' => _x( 'Espresso', 'Theme starter content', 'twentyseventeen' ),
-				'file'       => 'assets/images/espresso.jpg', // URL relative to the template directory.
-			),
-			'image-sandwich' => array(
-				'post_title' => _x( 'Sandwich', 'Theme starter content', 'twentyseventeen' ),
-				'file'       => 'assets/images/sandwich.jpg',
-			),
-			'image-coffee'   => array(
-				'post_title' => _x( 'Coffee', 'Theme starter content', 'twentyseventeen' ),
-				'file'       => 'assets/images/coffee.jpg',
-			),
-		),
+// 		// Create the custom image attachments used as post thumbnails for pages.
+// 		'attachments' => array(
+// 			'image-espresso' => array(
+// 				'post_title' => _x( 'Espresso', 'Theme starter content', 'twentyseventeen' ),
+// 				'file'       => 'assets/images/espresso.jpg', // URL relative to the template directory.
+// 			),
+// 			'image-sandwich' => array(
+// 				'post_title' => _x( 'Sandwich', 'Theme starter content', 'twentyseventeen' ),
+// 				'file'       => 'assets/images/sandwich.jpg',
+// 			),
+// 			'image-coffee'   => array(
+// 				'post_title' => _x( 'Coffee', 'Theme starter content', 'twentyseventeen' ),
+// 				'file'       => 'assets/images/coffee.jpg',
+// 			),
+// 		),
 
-		// Default to a static front page and assign the front and posts pages.
-		'options'     => array(
-			'show_on_front'  => 'page',
-			'page_on_front'  => '{{home}}',
-			'page_for_posts' => '{{blog}}',
-		),
+// 		// Default to a static front page and assign the front and posts pages.
+// 		'options'     => array(
+// 			'show_on_front'  => 'page',
+// 			'page_on_front'  => '{{home}}',
+// 			'page_for_posts' => '{{blog}}',
+// 		),
 
-		// Set the front page section theme mods to the IDs of the core-registered pages.
-		'theme_mods'  => array(
-			'panel_1' => '{{homepage-section}}',
-			'panel_2' => '{{about}}',
-			'panel_3' => '{{blog}}',
-			'panel_4' => '{{contact}}',
-		),
+// 		// Set the front page section theme mods to the IDs of the core-registered pages.
+// 		'theme_mods'  => array(
+// 			'panel_1' => '{{homepage-section}}',
+// 			'panel_2' => '{{about}}',
+// 			'panel_3' => '{{blog}}',
+// 			'panel_4' => '{{contact}}',
+// 		),
 
-		// Set up nav menus for each of the two areas registered in the theme.
-		'nav_menus'   => array(
-			// Assign a menu to the "top" location.
-			'top'    => array(
-				'name'  => __( 'Top Menu', 'twentyseventeen' ),
-				'items' => array(
-					'link_home', // Note that the core "home" page is actually a link in case a static front page is not used.
-					'page_about',
-					'page_blog',
-					'page_contact',
-				),
-			),
+// 		// Set up nav menus for each of the two areas registered in the theme.
+// 		'nav_menus'   => array(
+// 			// Assign a menu to the "top" location.
+// 			'top'    => array(
+// 				'name'  => __( 'Top Menu', 'twentyseventeen' ),
+// 				'items' => array(
+// 					'link_home', // Note that the core "home" page is actually a link in case a static front page is not used.
+// 					'page_about',
+// 					'page_blog',
+// 					'page_contact',
+// 				),
+// 			),
 
-			// Assign a menu to the "social" location.
-			'social' => array(
-				'name'  => __( 'Social Links Menu', 'twentyseventeen' ),
-				'items' => array(
-					'link_yelp',
-					'link_facebook',
-					'link_twitter',
-					'link_instagram',
-					'link_email',
-				),
-			),
-		),
-	);
+// 			// Assign a menu to the "social" location.
+// 			'social' => array(
+// 				'name'  => __( 'Social Links Menu', 'twentyseventeen' ),
+// 				'items' => array(
+// 					'link_yelp',
+// 					'link_facebook',
+// 					'link_twitter',
+// 					'link_instagram',
+// 					'link_email',
+// 				),
+// 			),
+// 		),
+// 	);
 
-	/**
-	 * Filters Twenty Seventeen array of starter content.
-	 *
-	 * @since Twenty Seventeen 1.1
-	 *
-	 * @param array $starter_content Array of starter content.
-	 */
-	$starter_content = apply_filters( 'twentyseventeen_starter_content', $starter_content );
+// 	/**
+// 	 * Filters Twenty Seventeen array of starter content.
+// 	 *
+// 	 * @since Twenty Seventeen 1.1
+// 	 *
+// 	 * @param array $starter_content Array of starter content.
+// 	 */
+// 	$starter_content = apply_filters( 'twentyseventeen_starter_content', $starter_content );
 
-	add_theme_support( 'starter-content', $starter_content );
-}
-add_action( 'after_setup_theme', 'twentyseventeen_setup' );
+// 	add_theme_support( 'starter-content', $starter_content );
+// }
+// add_action( 'after_setup_theme', 'twentyseventeen_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
