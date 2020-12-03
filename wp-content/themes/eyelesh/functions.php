@@ -87,14 +87,15 @@ function custom_post_type() {
 			'publicly_queryable'  => true,
 			'capability_type'     => 'post',
 			'show_in_rest' => true,
+			'rewrite' => true,
 	 
 		);
 		 
 		// Registering your Custom Post Type
 		
 		register_post_type( 'usluge', $args );
-	//	add_post_type_support( 'usluga', 'thumbnail' );
-		add_filter('register_post_type_args', 'add_post_theme_support_args', 10, 2);
+		add_post_type_support( 'usluga', 'thumbnail' );
+	//	add_filter('register_post_type_args', 'add_post_theme_support_args', 10, 2);
 	 
 	}
 
