@@ -5,12 +5,14 @@ get_header(); ?>
 <div class="wrap">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-
 			<?php
 			// Start the Loop.
 			while ( have_posts() ) :
-				the_post();
+				the_post(); 
+			?>
 
+				<h3 class="text-center"><?php the_title(); ?></h3>
+<?php
 				get_template_part( 'template-parts/post/content', get_post_format() );
 
 				// If comments are open or we have at least one comment, load up the comment template.
@@ -24,7 +26,8 @@ get_header(); ?>
 						'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Next', 'twentyseventeen' ) . '</span> <span class="nav-title">%title<span class="nav-title-icon-wrapper">' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ) . '</span></span>',
 					)
 				);
-
+?>				
+			<?php		
 			endwhile; // End the loop.
 			?>
 

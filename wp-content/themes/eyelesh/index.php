@@ -40,7 +40,7 @@
         <hr class="divider my-4" />
         <div class="row">
 
-            <?php
+<?php
 $loop = new WP_Query( array(
     'post_type' => 'usluge',
     'posts_per_page' => 10
@@ -48,13 +48,13 @@ $loop = new WP_Query( array(
 );
 ?>
             <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
                     <div class="caption">
                         <h3 class="text-center"><?php the_title(); ?></h3>
                         <p><?php the_content();?></p>
-                        <p><a href="#" class="btn btn-primary" role="button">Button</a>
+                        <!-- <p><a href="<?php // echo get_permalink();?>" class="btn btn-primary" role="button">Button</a> -->
+                        <a href="<?php echo get_permalink();?>" class="stretched-link">Saznaj više</a>
                     </div>
                 </div>
             </div>
