@@ -1,22 +1,6 @@
 <?php get_header(); ?>
 
-<!-- Masthead-->
-<header class="masthead">
-    <div class="container h-100">
-        <div class="row h-100 align-items-center justify-content-center text-center">
-            <div class="col-lg-10 align-self-end">
-                <h1 class="text-uppercase text-white font-weight-bold">Your Favorite Source of Free Bootstrap Themes
-                </h1>
-                <hr class="divider my-4" />
-            </div>
-            <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">Start Bootstrap can help you build better websites using
-                    the Bootstrap framework! Just download a theme and start customizing, no strings attached!</p>
-                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
-            </div>
-        </div>
-    </div>
-</header>
+
 <!-- About-->
 <section class="page-section bg-primary" id="about">
     <div class="container">
@@ -54,10 +38,11 @@ $loop = new WP_Query( array(
                         <h3 class="text-center"><?php the_title(); ?></h3>
                         <p><?php the_content();?></p>
                         <!-- <p><a href="<?php // echo get_permalink();?>" class="btn btn-primary" role="button">Button</a> -->
-                        <a href="<?php echo get_permalink();?>" class="stretched-link">Saznaj više</a>
+                        <a href="<?php echo get_permalink() . "#post-". get_the_ID();?>" class="stretched-link">Saznaj više</a>
                     </div>
                 </div>
             </div>
+           
 
             <?php endwhile; wp_reset_query(); ?>
 
