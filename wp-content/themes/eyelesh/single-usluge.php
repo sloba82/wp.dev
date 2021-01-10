@@ -9,7 +9,9 @@ get_header(); ?>
 
 						<?php  while ( have_posts() ) : the_post(); ?>
 						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
 							<?php the_title( '<h1>','</h1>' );  ?>
+							<div > <?php the_post_thumbnail(); ?></div>
 						
 							<div class="entry-content"><?php the_content(); ?></div>
 						</article>
