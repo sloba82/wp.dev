@@ -39,7 +39,7 @@ $loop = new WP_Query( array(
                     <div class="caption">
                         <h3 class="text-center"><?php the_title(); ?></h3>
                         <div > <?php the_post_thumbnail(); ?></div>
-                        <p><?php the_content();?></p>
+                        <p><?= $post->opis?></p>
                         <!-- <p><a href="<?php // echo get_permalink();?>" class="btn btn-primary" role="button">Button</a> -->
                         <a href="<?php echo get_permalink() . "#post-". get_the_ID();?>" class="stretched-link">Saznaj više</a>
                     </div>
