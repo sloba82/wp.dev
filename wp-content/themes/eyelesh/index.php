@@ -32,26 +32,36 @@ $loop = new WP_Query( array(
 );
 ?>
             <?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
-
-            
+        
             <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <div class="caption">
-                        <h3 class="text-center"><?php the_title(); ?></h3>
-                        <div > <?php the_post_thumbnail(); ?></div>
-                        <p><?= $post->opis?></p>
-                        <!-- <p><a href="<?php // echo get_permalink();?>" class="btn btn-primary" role="button">Button</a> -->
-                        <a href="<?php echo get_permalink() . "#post-". get_the_ID();?>" class="stretched-link">Saznaj više</a>
+                    <div class="thumbnail box">
+                        <div class="caption">
+                            <div class="mb-4 mt-2">
+                                <h3 class="text-center"><?php the_title(); ?></h3>
+                            </div>
+                            <div class="thumbnail-center"> 
+                                <?php the_post_thumbnail(); ?>
+                            </div>
+                            <p>
+                                <?= substr($post->opis, 0, 124);?> ...
+                            </p>  
+                            <!-- <p><a href="<?php // echo get_permalink();?>" class="btn btn-primary" role="button">Button</a> -->
+                            <a href="<?php echo get_permalink() . "#post-". get_the_ID();?>" class="stretched-link">Saznaj više</a>
+                        </div>
                     </div>
-                </div>
             </div>
            
-
             <?php endwhile; wp_reset_query(); ?>
 
         </div>
     </div>
 </section>
+<?php
+$page = get_page_by_title( 'Home' );
+
+$content = apply_filters('the_content', $page->post_content); 
+echo $content;
+?>
 
 <!-- Portfolio-->
 <div id="portfolio">

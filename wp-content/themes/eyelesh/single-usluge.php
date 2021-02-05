@@ -7,17 +7,20 @@ get_header(); ?>
 		<main id="main" class="site-main" role="main">
 			<div class="container">
 
+			
+
 						<?php  while ( have_posts() ) : the_post(); ?>
 						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-							<?php the_title( '<h3>','</h3>' );  ?>
-							<div > <?php the_post_thumbnail(); ?></div>
-						
+							<div class="mb-4 mt-5">
+								<?php the_title( '<h3>','</h3>' );?>
+							</div>
+							
+
+
+							<div> <?php the_post_thumbnail(); ?></div>
 							<div class="entry-content"><?php the_content(); ?></div>
 						</article>
-
-
-				
 
 				<?php 
 						the_post_navigation(

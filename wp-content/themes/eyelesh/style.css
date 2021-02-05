@@ -1,0 +1,15 @@
+
+.box {
+    padding: 10px;
+    border: 10px solid #fb6195;
+    background-color: white;
+    margin: 10px;
+}
+
+.thumbnail-center img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+
