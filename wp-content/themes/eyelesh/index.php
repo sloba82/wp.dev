@@ -64,7 +64,7 @@ echo $content;
 ?>
 
 <!-- Portfolio-->
-<div id="portfolio">
+<!-- <div id="portfolio">
     <div class="container-fluid p-0">
         <div class="row no-gutters">
             <div class="col-lg-4 col-sm-6">
@@ -135,7 +135,7 @@ echo $content;
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Call to action-->
 <section class="page-section bg-dark text-white">
     <div class="container text-center">
